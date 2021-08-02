@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Index Page</title>
+  </head>
+  <body>
+    {% include 'blocks/header.html' %}
+
+    <h3>Добро пожаловать!</h3>
+    <a href="/create_list/">Создать список</a>
+    <a href="/guild_lists/">Списки гильдии</a>
+    <h5>Общедоступные списки: </h5>
+    <div class="lists">
+      {% for list in lists %}
+      {% if list.access == 'all' %}
+      <table>
+        <tr>
+          <td>{{ list.name }}</td>
+        </tr>
+        <tr>
+          <td>Создал: </td>
+          <td>{{ list.creator.username }}</td>
+        </tr>
+        {% for player in list.players.all %}
+        <tr>
+          <td>{{ player.level }}</td>
+          <td>{{ player.type }}</td>
+          <td>{{ player.nickname }}</td>
+          <td>{{ player.CS }}</td>
+          <td>{{ player.guild }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% include 'blocks/footer.html' %}
+  </body>
+</html>

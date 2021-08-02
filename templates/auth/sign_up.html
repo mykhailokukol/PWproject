@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Sign Up Page</title>
+  </head>
+  <body>
+    {% include 'blocks/header.html' %}
+      <div class="signup_form">
+        <form action="{% url 'sign_up_page' %}" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ SignUpForm.as_p }}
+          <input type="submit" name="" value="Зарегестрироваться">
+        </form>
+      </div>
+    {% include 'blocks/footer.html' %}
+  </body>
+</html>

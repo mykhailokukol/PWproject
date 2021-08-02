@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Списки гильдии</title>
+  </head>
+  <body>
+    {% include 'blocks/header.html' %}
+      <div class="">
+        <a href="/create_list/">Создать список</a>
+      </div>
+      <div class="lists">
+        <h4>Ваша гильдия: {{ user_guild }}. Здесь Вы можете видеть только те списки, которые доступны Вам и Вашим согильдийцам.</h4>
+        {% for list in lists %}
+          {% if list.access == 'guild' %}
+            <table>
+              <tr>
+                <td>Создал: {{ list.creator }}</td>
+              </tr>
+              <tr>
+                <td>{{ list.name }}</td>
+              </tr>
+              {% for player in list.players.all %}
+              <tr>
+                <td>{{ player.level }}</td>
+                <td>{{ player.type }}</td>
+                <td>{{ player.nickname }}</td>
+                <td>{{ player.CS }}</td>
+              </tr>
+              {% endfor %}
+            </table>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% include 'blocks/footer.html' %}
+  </body>
+</html>

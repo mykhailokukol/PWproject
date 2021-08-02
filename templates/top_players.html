@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Top Players</title>
+  </head>
+  <body>
+    {% include 'blocks/header.html' %}
+    <h2>Top Players List:</h2>
+    <ol>
+      {% for player in players_list %}
+      <li> {{ player }} БМ [{{ player.guild }}]</li>
+      {% endfor %}
+    </ol>
+    {% include 'blocks/footer.html' %}
+  </body>
+</html>

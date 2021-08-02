@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    {% include 'blocks/header.html' %}
+      <div class="login_form">
+        <form action="{% url 'login_page' %}" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ LogInForm.as_p }}
+          <input type="submit" name="" value="Войти">
+        </form>
+      </div>
+    {% include 'blocks/footer.html' %}
+  </body>
+</html>

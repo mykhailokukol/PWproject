@@ -26,4 +26,5 @@ urlpatterns = [
     path('login/', views.login_page, name='login_page'),
     path('create_list/', views.create_list_page, name='create_list_page'),
     path('guild_lists/', views.guild_lists_page, name='guild_lists_page'),
+    path('create_post/', views.create_post, name='create_post_page'),
 ]

@@ -9,9 +9,12 @@
 
     <h3>Добро пожаловать!</h3>
     <a href="/create_list/">Создать список</a>
+    {% if userx.is_moderator == True %}
+    <a href="/create_post/">Создать новость</a>
+    {% endif %}
     <a href="/guild_lists/">Списки гильдии</a>
     <h5>Общедоступные списки: </h5>
-    <div class="lists">
+    <div class="Lists">
       {% for list in lists %}
       {% if list.access == 'all' %}
       <table>
@@ -33,6 +36,18 @@
         {% endfor %}
       </table>
       {% endif %}
+      {% endfor %}
+    </div>
+    <div class="News">
+      {% for post in news %}
+      <table>
+        <tr>
+          <td>{{ post.title }}</td>
+        </tr>
+        <tr>
+          <td>{{ post.text }}</td>
+        </tr>
+      </table>
       {% endfor %}
     </div>
     {% include 'blocks/footer.html' %}

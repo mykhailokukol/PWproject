@@ -41,7 +41,6 @@ class Player(models.Model):
     level = models.CharField(max_length=8, default='1')
     type = models.CharField(max_length=16, choices=TYPE_CHOICES, default='Класс не указан.')
     guild = models.ForeignKey('Guild', on_delete=models.CASCADE, default=None)
-    # is_moderator = models.BooleanField(default=False)
 
     def __str__(self):
         return ('%s %s: %s' % (self.type, self.nickname, self.CS))
@@ -57,7 +56,7 @@ class Event(models.Model):
 
     name = models.CharField(max_length=64)
     time = models.CharField(max_length=5, default='00:00')
-    day = models.CharField(default='Понедельник', choices=DAY_CHOICES, max_length=10)
+    day = models.CharField(default='Понедельник', choices=DAY_CHOICES, max_length=16)
     week = models.CharField(default='Всегда', choices=WEEK_CHOICES, max_length=12)
 
     def __str__(self):
@@ -85,3 +84,7 @@ class Guild(models.Model):
 
     def __str__(self):
         return self.name
+
+class NewsPost(models.Model):
+    title = models.CharField(max_length=128, default='Название новости', null=False, blank=False)
+    text = models.TextField(null=False, blank=False)

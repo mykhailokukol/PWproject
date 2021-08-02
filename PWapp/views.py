@@ -7,8 +7,30 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 # Create your views here.
 def index(request):
     lists = models.List.objects.all()
+    news = models.NewsPost.objects.all()
+    if request.user.is_authenticated:
+        userx = models.UserExtended.objects.get(user=request.user)
+    else:
+        userx = None
     return render(request, 'index.html', {
         'lists': lists,
+        'news': news,
+        'userx': userx,
+    })
+
+@login_required
+def create_post(request):
+    if request.method == 'POST':
+        form = CreatePostForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            text = form.cleaned_data['text']
+            form.save()
+            return redirect('/')
+    else:
+        form = CreatePostForm()
+    return render(request, 'create_post.html', {
+        'CreatePostForm': form,
     })
 
 @login_required
@@ -46,7 +68,7 @@ def create_list_page(request):
             form.save()
             last_list = models.List.objects.last()  #
             last_list.creator = request.user        # Я знаю, что это костыль вонючий, но, почему-то, save_model() не работает
-            last_list.save()                        #
+            last_list.save()                        # возможно, я его не туда вписываю, а в документации не могу найти куда :)
             return redirect('/')
     else:
         form = CreateListForm()

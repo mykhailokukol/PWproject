@@ -41,3 +41,15 @@ class CreateListForm(forms.ModelForm):
             'access': 'Кто может получить доступ?',
             'players': 'Выберите игроков: ',
         }
+
+class CreatePostForm(forms.ModelForm):
+    title = forms.CharField(max_length=128)
+    text = forms.TextInput()
+
+    class Meta:
+        model = models.NewsPost
+        fields = ('title', 'text')
+        labels = {
+            'title': 'Заголовок',
+            'text': 'Текст',
+        }
